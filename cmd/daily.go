@@ -1,9 +1,8 @@
 package cmd
 
 import (
-	"fmt"
+	"os"
 
-	"github.com/billylkc/get_me_rich/src"
 	"github.com/spf13/cobra"
 )
 
@@ -13,10 +12,12 @@ var dailyCmd = &cobra.Command{
 	Short:   "Generate daily summary",
 	Long:    `Generate daily summary`,
 	Aliases: []string{"d"},
-	Run: func(cmd *cobra.Command, args []string) {
-		a := src.Hello()
-		fmt.Println(a)
-		fmt.Println("daily called")
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			cmd.Help()
+			os.Exit(0)
+		}
+		return nil
 	},
 }
 
